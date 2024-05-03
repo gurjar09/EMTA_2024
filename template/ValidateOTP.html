@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/VendorLogin.css">
+    <title>www.EMTA Placement.com</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- <p> <img src="/static/pics/WhatsApp Image 2024-02-27 at 2.32.36 PM.jpeg" alt=""></p> -->
+       
+
+        <form method="POST" class="register-container" id="register" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="top">
+                <span>Don't have an account? <a href="VendorSignup">SignUp</a></span>
+                <header>Login</header>
+            </div>
+
+            <div class="input-box">
+                <input type="text" class="input-field" name="otp" placeholder="Enter OTP " required>
+                <i class="bx bx-envelope"></i>
+            </div>
+
+
+            <a href="VendorDashboard">
+                <div class="input-box">
+                    <input type="submit" class="submit" value="Login">
+                </div>
+            </a>
+        </form>
+    </div>
+</body>
+</html>

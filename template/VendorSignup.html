@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/VendorSignup.css">
+  <title>Vendor Signup</title>
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <form method="POST" class="register-container" id="register" enctype="multipart/form-data">
+
+      {% csrf_token %}
+      <div class="top">
+        <span>Have an account? <a href="{% url 'VendorLogin' %}">Login</a></span>
+        <header>Sign Up</header>
+      </div>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li>
+          <p style="color: red;">{{ message }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <div class="two-forms">
+        <div class="input-box">
+          <input type="text" class="input-field" name="first_name" placeholder="Firstname" autocapitalize="words"
+            required>
+          <i class="bx bx-lock-mobile"></i>
+        </div>
+        <div class="input-box">
+          <input type="text" class="input-field" name="last_name" placeholder="Lastname" autocapitalize="words">
+          <i class="bx bx-lock-mobile"></i>
+        </div>
+      </div>
+      <div class="input-box">
+        <input type="text" class="input-field" name="username" placeholder="Enter a Username (ex.EMTA0001)"
+          autocomplete="off" pattern="[A-Z]{4}[0-9]{4}" title="User Name Must Contain Prefix EMTA And Numbers 0001... ">
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="mobile" class="input-field" name="mobile_number" placeholder="Mobile Number" required
+          pattern="[0-9]{10}">
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="email" class="input-field" name="email" placeholder="Email" required
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="text" class="input-field" name="password1" placeholder="Create Password (Ex@123)"
+          autocomplete="off" title="Password must be at least 5 characters long" required
+          pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])(?!^[0-9]*$).{5,}$">
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="password" class="input-field" name="password2" placeholder="Confirm Password" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <span id="passwordError" class="error"></span><br>
+      <div class="input-box">
+        <input type="submit" class="submit" onclick="validatePasswords()" value="Register">
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

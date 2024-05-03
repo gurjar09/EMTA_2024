@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/VendorLogin.css">
+  <title>www.carvanDrive.com</title>
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <form method="POST" class="register-container" id="register" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="top">
+        <header>Candidate Form</header>
+      </div>
+
+      <div class="input-box">
+        <input type="text" class="input-field" name="first_name" placeholder="First Name" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="text" class="input-field" name="last_name" placeholder="Last Name" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="text" class="input-field" name="qualification" placeholder="Highest Qualification" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="text" class="input-field" name="sector" placeholder="Sector Preference" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="tel" class="input-field" name="mobile_number" placeholder="Mobile Number" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="email" class="input-field" name="email" placeholder="Email" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="text" class="input-field" name="location" placeholder="Enter Your Location" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <div class="input-box">
+        <input type="text" class="input-field"name="refer_code" value="{{ initial_data.refer_code }}" placeholder="Enter Refer Code">
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <p>Resume</p>
+      <div class="input-box">
+        <input type="file" class="input-field" name="resume" placeholder="Resume" required>
+        <i class="bx bx-lock-mobile"></i>
+      </div>
+      <a href="signup">
+        <div class="input-box">
+          <input type="submit" class="submit" value="Register">
+        </div>
+      </a>
+      
+    </form>
+
+
+  </div>
+  
+
+</body>
+
+</html>

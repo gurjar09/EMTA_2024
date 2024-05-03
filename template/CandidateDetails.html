@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    www.EMTA Placement.com
+  </title>
+  <!-- Favicon -->
+  <link href="/static/css/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="/static/css/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="/static/css/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/static/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body class="">
+  <!-- Navbar -->
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <div class="container-fluid">
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
+        aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Brand -->
+      <a class="navbar-brand pt-0" href="VendorDashboard">
+        <img src="/static/pics/EMTA.jpeg" class="navbar-brand-img" alt="...">
+      </a>
+      <!-- User -->
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Collapse header -->
+        <div class="navbar-collapse-header d-md-none">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="../index.html">
+                <img src="../assets/img/brand/blue.png">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main"
+                aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Form -->
+        <form class="mt-4 mb-3 d-md-none">
+          <div class="input-group input-group-rounded input-group-merge">
+            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search"
+              aria-label="Search">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="fa fa-search"></span>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Navigation -->
+        <ul class="navbar-nav">
+          <li class="nav-item {% if request.path == '/adminDashboard' %}active{% endif %}">
+              <a class="nav-link  {% if request.path == '/adminDashboard' %}active{% endif %}" href="{% url 'admin_dashboard' %}">
+                  <i class="ni ni-tv-2 text-primary"></i> Vendor
+              </a>
+          </li>
+          <li class="nav-item active{% if request.path == '/candidateDashboard' %}active{% endif %}">
+              <a class="nav-link active {% if request.path == '/candidateDashboard' %}active{% endif %}" href="{% url 'candidate_dashboard' %}">
+                  <i class="ni ni-tv-2 text-primary"></i> Candidate
+              </a>
+          </li>
+          <li class="nav-item {% if request.path == '/EmployeeDetails' %}active{% endif %}">
+              <a class="nav-link {% if request.path == '/EmployeeDetails' %}active{% endif %}" href="{% url 'employee_details' %}">
+                  <i class="ni ni-tv-2 text-primary"></i> Employee
+              </a>
+          </li>
+          
+      </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header pb-8  d-flex align-items-center"
+      style="min-height: 400px; background-image: url(/static/pics/background.avif); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Welcome </h1>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt--7">
+      <div class="row">
+          <!-- Profile card -->
+          <div class="col-xl-4 order-xl-1">
+              <!-- Profile details -->
+              <div class="card card-profile shadow">
+                  <!-- Profile image -->
+                  <div class="row justify-content-center">
+                      <div class="col-lg-3 order-lg-2">
+                          <div class="card-profile-image">
+                              <img src="/static/pics/EMTA.jpeg" class="rounded-circle">
+                          </div>
+                      </div>
+                  </div>
+  
+                  <!-- Profile header -->
+                  <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+  
+                  </div>
+                  <!-- Profile body -->
+                  <div class="card-body pt-0 pt-md-4">
+                      <!-- Profile stats -->
+                      <div class="row">
+                          <div class="col">
+                              <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+  
+  
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Profile details -->
+                      <div class="text-overflow">
+                          <h3 class="text-center">
+                              {{ candidate.first_name }} &nbsp; {{ candidate.last_name }}
+                          </h3>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Sector - {{ candidate.sector }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Email - {{ candidate.email }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Mobile - {{ candidate.mobile_number }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Status - {{ candidate.status }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Qualification - {{ candidate.qualification }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Refer Code - {{ candidate.refer_code }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Location - {{ candidate.location }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Total Commission - {{ candidate.totalCommission }}
+                          </div>
+                          <div>
+                              <i class="ni education_hat mr-2"></i>Vendor Commission - {{ candidate.commission }}
+                          </div>
+  
+                          <hr class="my-4" />
+                      </div>
+  
+                  </div>
+              </div>
+          </div>
+          <!-- End Profile card -->
+          <!-- Account settings -->
+          <div class="col-xl-8 order-xl-2 mb-5 mb-xl-0">
+              <div class="card bg-secondary shadow">
+                  <div class="card-header bg-white border-0">
+                      <div class="row align-items-center">
+                          <div class="col-8">
+                              <h3 class="mb-0">Edit</h3>
+                          </div>
+  
+                      </div>
+                  </div>
+                  <div class="card-body">
+  
+                      <form method="POST" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <h6 class="heading-small text-muted mb-4">Candidate Details</h6>
+                          <div class="pl-lg-4">
+                              <div class="row">
+  
+                                  <div class="col-lg-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="input-first-name">Vendor Commission </label>
+                                          <input type="text" id="input-first-name" class="form-control form-control-alternative"
+                                              name="commission" placeholder="Enter Vendor Commission" 
+                                              value="{{ initial_data.commission }}">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-first-name">Contact By </label>
+                                        <input type="text" id="input-first-name" class="form-control form-control-alternative"
+                                            name="Contact_by" placeholder="Enter Vendor Commission" 
+                                            value="{{ initial_data.Contact_by }}">
+                                    </div>
+                                </div>
+  
+                                  <div class="col-lg-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="input-last-name">Total Commission</label>
+                                          <input type="text" id="input-last-name" class="form-control form-control-alternative"
+                                              name="totalCommission" placeholder="Total Commission" value="{{ initial_data.totalCommission }}">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-resume">Resume</label>
+                                        {% if initial_data.resume %}
+                                        <a href="{{ initial_data.resume }}" target="_blank">View Resume</a>
+                                        {% else %}
+                                        <p>No resume uploaded</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                              </div>
+                              <div class="row">
+                                  <div class="fuel-container" name="type">
+                                      <div class="fuel-type">Contact:</div>
+                                      <div class="checkbox-wrapper-29">
+                                          <label class="checkbox">
+                                              <input type="radio" class="checkbox__input" name="Contact" value="No" {% if initial_data.Contact == 'No' %} checked {% endif %}>
+                                              <span class="checkbox__label"></span>
+                                              No
+                                          </label>
+                                      </div>
+                                      <div class="checkbox-wrapper-29">
+                                          <label class="checkbox">
+                                              <input type="radio" class="checkbox__input" name="Contact" value="Yes" {% if initial_data.Contact == 'Yes' %} checked {% endif %}>
+                                              <span class="checkbox__label"></span>
+                                              Yes
+                                          </label>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                  <div class="fuel-container" name="paymentDate">
+                                      <div class="fuel-type">Status of Selection :</div>
+                                      <div class="checkbox-wrapper-29">
+                                          <label class="checkbox">
+                                              <input type="radio" class="checkbox__input" name="status" value="Pending" {% if initial_data.status == 'Pending' %} checked {% endif %}>
+                                              <span class="checkbox__label"></span>
+                                              Pending
+                                          </label>
+                                      </div>
+                                      <div class="checkbox-wrapper-29">
+                                          <label class="checkbox">
+                                              <input type="radio" class="checkbox__input" name="status" value='Selected' {% if initial_data.status == 'Selected' %} checked {% endif %}>
+                                              <span class="checkbox__label"></span>
+                                              Selected
+                                          </label>
+                                      </div>
+                                      <div class="checkbox-wrapper-29">
+                                          <label class="checkbox">
+                                              <input type="radio" class="checkbox__input" name="status" value='Rejected' {% if initial_data.status == 'Rejected' %} checked {% endif %}>
+                                              <span class="checkbox__label"></span>
+                                              Rejected
+                                          </label>
+                                      </div>
+                                      <div class="checkbox-wrapper-29">
+                                          <label class="checkbox">
+                                              <input type="radio" class="checkbox__input" name="status" value='Hold' {% if initial_data.status == 'Hold' %} checked {% endif %}>
+                                              <span class="checkbox__label"></span>
+                                              Hold
+                                          </label>
+                                      </div>
+                                  </div>
+  
+                              </div>
+                          </div>
+  
+  
+  
+  
+                      </div>
+  
+                  </div>
+  
+                  <div class="col-4 text-right">
+                      <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                  </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- Core -->
+  <script src="static/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="static/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional JS -->
+  <script src="static/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="static/js/plugins/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="static/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <!-- Demo JS - remove this in your project -->
+  <script src="static/js/demo.min.js"></script>
+</body>
+
+</html>
