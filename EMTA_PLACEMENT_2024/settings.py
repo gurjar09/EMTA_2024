@@ -84,8 +84,7 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get('DATABASE_URL')
-DATABASES['default'] = dj_database_url.parse(database_url) 
+DATABASES['default'] = dj_database_url.parse('postgres://emta_2024_user:57BzWXau5y1GSyvi9JnbXzF18PnGZvOK@dpg-coqdkedjm4es73akjseg-a.oregon-postgres.render.com/emta_2024') 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
