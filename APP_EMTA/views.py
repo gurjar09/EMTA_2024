@@ -817,3 +817,24 @@ def AdminVendorDetails(request, vendor_id):
         'bphoto_inside_image_url': bphoto_inside_image_url,
         'bank_document_url' : bank_document_url
     })
+
+
+def EmployeeCandidateDetails(request, candidate_id):
+    candidate = get_object_or_404(Candidate, id=candidate_id)
+    initial_data = {
+        'commission': candidate.commission,
+        'totalCommission': candidate.totalCommission,
+        'Contact': candidate.Contact,
+        'status': candidate.status,
+        'Contact_by' : candidate.Contact_by,
+        'resume': candidate.resume.url if candidate.resume else None
+    }
+    if request.method == 'POST':
+        candidate.commission = request.POST.get('commission')
+        candidate.totalCommission = request.POST.get('totalCommission')
+        candidate.Contact = request.POST.get('Contact')
+        candidate.status = request.POST.get('status')
+        candidate.Contact_by = request.POST.get('Contact_by')
+        candidate.save()
+        return redirect(CandidateDetails, candidate_id=candidate_id)
+    return render(request, 'EmployeeCandidateDetails.html', {'candidate': candidate, 'initial_data': initial_data})
