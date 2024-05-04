@@ -415,7 +415,6 @@ def reset_password(request, username):
 #     vendor_commission , created = VendorCommission.objects.get_or_create(vendor = vendor)
 #     vendor_commission.save()
 #     return render(request,'VendorCommission.html')
-
 def adminDashBoard(request):
     if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'POST':
@@ -447,7 +446,9 @@ def adminDashBoard(request):
                 if profile:
                     document_id = profile.profiledocument.id
                     bussiness_id = profile.bussinessdetails.id
-                    bank_id = profile.bank.id
+                    bank_id = None
+                    if hasattr(profile, 'bank'):
+                        bank_id = profile.bank.id
                     user_data.append({
                         'user': user,
                         'shop_name': profile.shop_name.capitalize(),
@@ -475,6 +476,7 @@ def adminDashBoard(request):
             return render(request, 'usernotfound.html', {'error': 'User details not found'})
     else:
         return render(request, 'username.html', {'error': 'User not authenticated or not a superuser'})
+
 
 
 def vendor_candidates(request, vendor_code):
