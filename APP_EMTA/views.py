@@ -72,7 +72,6 @@ def candidateform(request):
             qualification=qualification,
             mobile_number=mobile_number,
             email=email,
-            resume=resume,
             sector=sector,
             location=location,
             refer_code=refer_code,

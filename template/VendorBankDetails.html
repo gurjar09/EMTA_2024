@@ -295,7 +295,7 @@
             </div>
           </div>
           <div class="col-4 text-right">
-            <button class="btn btn-sm btn-primary" type="submit">Update</button>
+            <button class="btn btn-sm btn-primary" onclick="showPopup()" type="submit">Update</button>
           </div>
           </form>
         </div>
@@ -315,6 +315,13 @@
   <script src="static/js/argon-dashboard.min.js?v=1.1.2"></script>
   <!-- Demo JS - remove this in your project -->
   <script src="static/js/demo.min.js"></script>
+
+  <script>
+    function showPopup() {
+      alert("Details updated successfully!");
+    }
+  </script>
+  
 </body>
 
 </html>
