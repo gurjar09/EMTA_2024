@@ -737,7 +737,9 @@ def EmployeeDetails(request):
         return render(request, 'usernotfound.html', {'error': 'Employee details not found'})
     
 
-# views.py
+from django.shortcuts import render, get_object_or_404, redirect
+# from .models import Vendor, Bank, ProfileDocument, BussinessDetails
+
 def AdminVendorDetails(request, vendor_id):
     # Retrieve the vendor object by its ID or return a 404 error if not found
     vendor = get_object_or_404(Vendor, id=vendor_id)
@@ -751,27 +753,16 @@ def AdminVendorDetails(request, vendor_id):
     # Retrieve business details of the vendor
     business_details = BussinessDetails.objects.filter(vendor=vendor).first()
     
-    vendor = get_object_or_404(Vendor, id=vendor_id)
-    
-    # Retrieve bank details of the vendor
-    bank_details = Bank.objects.filter(vendor=vendor).first()
-    
-    # Retrieve profile document of the vendor
-    profile_document = ProfileDocument.objects.filter(vendor=vendor).first()
-    
-    # Retrieve business details of the vendor
-    business_details = BussinessDetails.objects.filter(vendor=vendor).first()
-    
     # Get URLs of previous images
-    adhar_image_url = profile_document.adhar_image.url if profile_document.adhar_image else None
-    pan_image_url = profile_document.pan_image.url if profile_document.pan_image else None
-    bpan_image_url = business_details.Bpan_image.url if business_details.Bpan_image else None
-    gst_image_url = business_details.gst_image.url if business_details.gst_image else None
-    gumasta_image_url = business_details.Gumasta.url if business_details.Gumasta else None
-    msme_image_url = business_details.MSME_image.url if business_details.MSME_image else None
-    bphoto_outer_image_url = business_details.Bphoto_outer.url if business_details.Bphoto_outer else None
-    bphoto_inside_image_url = business_details.Bphoto_inside.url if business_details.Bphoto_inside else None
-    bank_document_url = bank_details.bank_document.url if bank_details.bank_document else None
+    adhar_image_url = profile_document.adhar_image.url if profile_document and profile_document.adhar_image else None
+    pan_image_url = profile_document.pan_image.url if profile_document and profile_document.pan_image else None
+    bpan_image_url = business_details.Bpan_image.url if business_details and business_details.Bpan_image else None
+    gst_image_url = business_details.gst_image.url if business_details and business_details.gst_image else None
+    gumasta_image_url = business_details.Gumasta.url if business_details and business_details.Gumasta else None
+    msme_image_url = business_details.MSME_image.url if business_details and business_details.MSME_image else None
+    bphoto_outer_image_url = business_details.Bphoto_outer.url if business_details and business_details.Bphoto_outer else None
+    bphoto_inside_image_url = business_details.Bphoto_inside.url if business_details and business_details.Bphoto_inside else None
+    bank_document_url = bank_details.bank_document.url if bank_details and bank_details.bank_document else None
     
     if request.method == 'POST':
         # Handle form submission and update vendor details based on the submitted form data
@@ -785,27 +776,30 @@ def AdminVendorDetails(request, vendor_id):
         vendor.profile_verification = request.POST.get('profile_verification', '')
         vendor.save()
         
-        # Update bank details
-        bank_details.account_holder_name = request.POST.get('account_holder_name', '')
-        bank_details.account_number = request.POST.get('account_number', '')
-        bank_details.ifs_code = request.POST.get('ifs_code', '')
-        bank_details.micr_code = request.POST.get('micr_code', '')
-        bank_details.bank_name = request.POST.get('bank_name', '')
-        bank_details.save()
+        # Update bank details if bank_details exists
+        if bank_details:
+            bank_details.account_holder_name = request.POST.get('account_holder_name', '')
+            bank_details.account_number = request.POST.get('account_number', '')
+            bank_details.ifs_code = request.POST.get('ifs_code', '')
+            bank_details.micr_code = request.POST.get('micr_code', '')
+            bank_details.bank_name = request.POST.get('bank_name', '')
+            bank_details.save()
         
-        # Update profile document details
-        profile_document.adhar_card = request.POST.get('adhar_card', '')
-        profile_document.pan_card = request.POST.get('pan_card', '')
-        profile_document.save()
+        # Update profile document details if profile_document exists
+        if profile_document:
+            profile_document.adhar_card = request.POST.get('adhar_card', '')
+            profile_document.pan_card = request.POST.get('pan_card', '')
+            profile_document.save()
         
-        # Update business details
-        business_details.gst_number = request.POST.get('gst_number', '')
-        business_details.msme_number = request.POST.get('msme_number', '')
-        business_details.gumasta_number = request.POST.get('gumasta_number', '')
-        business_details.save()
+        # Update business details if business_details exists
+        if business_details:
+            business_details.gst_number = request.POST.get('gst_number', '')
+            business_details.msme_number = request.POST.get('msme_number', '')
+            business_details.gumasta_number = request.POST.get('gumasta_number', '')
+            business_details.save()
         
         # Redirect to a success page or any other appropriate page
-        return redirect(AdminVendorDetails)  # Replace 'success_page' with the name of your success page URL pattern
+        return redirect('AdminVendorDetails', vendor_id=vendor_id)  # Redirect back to the same page
     
     # Pass the vendor details and image URLs to the template for rendering the form
     return render(request, 'AdminVendorDetails.html', {
