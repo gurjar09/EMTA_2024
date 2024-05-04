@@ -19,11 +19,11 @@ class Vendor(models.Model):
         ('No', 'No'),
     ]
     profileVerification = [
-        ('InProcessing', 'InProcessing'),
+        ('Under Process', 'Under Process'),
         ('Verified', 'Verified'),
         ('Rejected(Upload Details Again)', 'Rejected(Upload Details Again)'),
     ]
-    profileVerification = models.CharField(max_length=50, choices=profileVerification,default='InProcessing')    
+    profileVerification = models.CharField(max_length=50, choices=profileVerification,default='Under Process')    
     total_commission_received = models.DecimalField(max_digits=10, decimal_places=2, default=0)  
     
     def get_or_create_profile_document(self):
