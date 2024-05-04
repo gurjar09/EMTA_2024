@@ -416,50 +416,38 @@ def reset_password(request, username):
 #     vendor_commission.save()
 #     return render(request,'VendorCommission.html')
 
-
 def adminDashBoard(request):
     if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'POST':
-            # Check if the request is for deleting a vendor
             vendor_id = request.POST.get('vendor_id')
             if vendor_id:
-                # Perform the deletion
                 try:
                     vendor = Vendor.objects.get(pk=vendor_id)
                     vendor.delete()
                     messages.success(request, 'Vendor deleted successfully.')
-                    # Redirect to avoid form resubmission
                     return redirect('admin_dashboard')
                 except Vendor.DoesNotExist:
                     messages.error(request, 'Vendor does not exist.')
 
         try:
-            # Get the name of the superuser
             superuser_name = request.user.username.capitalize()
-
-            # Retrieve vendors and other data
             username_query = request.GET.get('username', '')
             vendors = Vendor.objects.filter(user__username__icontains=username_query)
-            
-            # Calculate total commission of all candidates
             total_candidate_commission = Candidate.objects.aggregate(total_commission=Sum('commission'))['total_commission']
-            
-            # Calculate total commission of all vendors
             total_vendor_commission = Vendor.objects.aggregate(total_commission_received=Sum('total_commission_received'))['total_commission_received']
             
-            users = User.objects.filter(is_superuser=False)
             user_data = []
-            for user in users:
-                profile = None  # Initialize profile outside the try block
+            for user in User.objects.filter(is_superuser=False):
+                profile = None
                 try:
                     profile = Vendor.objects.get(user=user)
-                    document_id = profile.profiledocument.id  # Assuming ProfileDocument is related to Vendor
-                    bussiness_id = profile.bussinessdetails.id  # Assuming BussinessDetails is related to Vendor
-                    bank_id = profile.bank.id  # Assuming Bank is related to Vendor
-                except ObjectDoesNotExist:
-                    pass  # No need to handle here, profile will remain None if not found
-
+                except Vendor.DoesNotExist:
+                    pass
+                
                 if profile:
+                    document_id = profile.profiledocument.id
+                    bussiness_id = profile.bussinessdetails.id
+                    bank_id = profile.bank.id
                     user_data.append({
                         'user': user,
                         'shop_name': profile.shop_name.capitalize(),
@@ -469,9 +457,8 @@ def adminDashBoard(request):
                         'document_id': document_id,
                         'bussiness_id': bussiness_id,
                         'bank_id': bank_id,
-                        'vendor_id': profile.id,  # Add vendor ID for deletion
+                        'vendor_id': profile.id,
                     })
-                
 
             vendor_count = Vendor.objects.count()
             total_candidates_all = Candidate.objects.all().count()
@@ -479,7 +466,6 @@ def adminDashBoard(request):
             current_year = timezone.now().year
             vendors_this_month = Vendor.objects.filter(user__date_joined__year=current_year, user__date_joined__month=current_month).count()
 
-            # Check if user_data is empty
             if not user_data:
                 no_vendors_message = 'No vendors found.'
                 return render(request, 'AdminDashBoard.html', {'no_vendors_message': no_vendors_message, 'superuser_name': superuser_name})
@@ -489,7 +475,6 @@ def adminDashBoard(request):
             return render(request, 'usernotfound.html', {'error': 'User details not found'})
     else:
         return render(request, 'username.html', {'error': 'User not authenticated or not a superuser'})
-
 
 
 def vendor_candidates(request, vendor_code):
