@@ -444,8 +444,12 @@ def adminDashBoard(request):
                     pass
                 
                 if profile:
-                    document_id = profile.profiledocument.id
-                    bussiness_id = profile.bussinessdetails.id
+                    document_id = None
+                    if hasattr(profile, 'profiledocument'):
+                        document_id = profile.profiledocument.id
+                    bussiness_id = None
+                    if hasattr(profile, 'bussinessdetails'):
+                        bussiness_id = profile.bussinessdetails.id
                     bank_id = None
                     if hasattr(profile, 'bank'):
                         bank_id = profile.bank.id
