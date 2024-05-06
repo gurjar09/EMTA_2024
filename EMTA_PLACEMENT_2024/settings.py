@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG","False").lower() == "true"
 
-ALLOWED_HOSTS = ['emta-2024-8.onrender.com']
+ALLOWED_HOSTS = ['emta-2024-8.onrender.com','3.25.106.135','*']
 
 
 
